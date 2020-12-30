@@ -1,0 +1,191 @@
+***placerg -- A python package for simulation and coarse-graining analysis of time-dependent latent variable models***
+------------------------------------------------------------------------
+Written by Mia Morrell in 2019-2020.
+
+CONTACT: miamorrell321@gmail.com OR mcm8850@nyu.edu OR mmorrell@lanl.gov
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DEPENDENCIES
+------------------------------------------------------------------------
+blis.py
+numpy 
+pickle
+nbformat
+nbparameterise
+nbconvert
+scipy
+matplotlib
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TO DO
+------------------------------------------------------------------------
+TO RUN THIS CODE, YOU WILL NEED TO CHOOSE WHERE DATA WILL BE SAVED AND CHANGE FILEPATHS ACCORDINGLY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+INSTRUCTIONS 
+------------------------------------------------------------------------
+- To enter the virtual environment in which all dependencies are installed, pass 'source entropy/bin/activate' while in the directory ~/mia
+
+- In the directory ~/mia/placesim, you will find all the files I used for running simulations and performing analysis. 
+
+- To run a set of simulations, input your desired parameters into the function runsim() which is located in '~/mia/placesim/runfunc.py'. To run a simulation with no latent fields, use the function runsimnolatent(), located in the same file. Follow the format of any '~/mia/placesim/*sweep.py' file.
+
+- To perform coarse-graining analysis on a set of simulations whose filenames can be globbed, input your desired filenames into the function globfunc as shown in any '~/mia/placesim/*loop.py' file. 
+
+- To perform analysis on a single simulation or a set of simulations whose names cannot be globbed, input filenames into the function loopall() which is located in '~/mia/placesim/placerg/funcsboot.py'.
+
+- To plot results from the saved analysis object, follow the format used in any '~/mia/placesim/plotallnotebook*.ipynb' file. 
+
+- Consult the file '~/mia/placesim/placerg/objects.py' for accessible object attributes for any object in this module.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+HOW TO USE THIS REPOSITORY
+------------------------------------------------------------------------
+- Find all files used to run simulations in simulation_files directory
+- Find all files used to analyze simulations in analysis_files directory
+- Find all jupyter notebooks used to plot analyzed data in jupyter_notebooks directory
+- Find all module code in placerg directory
+- Find how each datafile was generated using which simulation and analysis files in the "PARAMETER SWEEPS" section of this README.
+- Contact Mia at listed email(s) with any questions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FILE STRUCTURE
+------------------------------------------------------------------------
+- All the code for this module is contained in the directory ~/mia/placesim/placerg on leonhard@euler. Use the virtual environment 'entropy' when working with this code.
+
+- All raw data files are located on storage@emory.edu (or ask Mia, she maintains a copy of all data)
+
+- Here is the basic layout of the module:
+1) 'funcs.py' -- contains custom functions for general simulation
+2) 'funcsrg.py' -- contains functions relevant to the RG coarse-graining schemes
+3) 'funcsall.py' -- contains functions which extract data from the saved simulation and analysis objects and process that data for plotting
+4) 'funcsboot.py' -- contains functions which extract data from the saved simulation and analysis objects and perform the bootstrapping procedure.
+5) 'objects.py' -- contains all the object structures for simulation and analysis.
+6) 'runfunc.py' -- contains functions which run the simulation and analysis.
+
+- Do not delete any files named 'dice6*' or '*dice6*', they are necessary for a cython function.
+
+- Do not delete the __init__.py file.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+JUPYTER NOTEBOOKS
+------------------------------------------------------------------------
+Here I list Jupyter notebooks and which types of figures they plot. You can find these jupyter notebooks, among others, in the jupyter_notebooks folder in this repository.
+
+1) 'functiondiagnostics.ipynb' -- checks that custom functions are working properly.
+2) 'contourplots.ipynb' -- plots summary plot of critical exponents, including experimental data.
+3) 'paperplots.ipynb' -- makes plots we are putting in the paper, takes in a single simulation.
+4) 'sanitychecks.ipynb' -- a couple of checks to make sure the simulation is working properly.
+5) 'phi_placecellplots.ipynb' -- plots cell activity averaged over track loop for each cell in a 2d plot for each simulation in the sweep over the parameter phi.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+PARAMETER SWEEPS
+------------------------------------------------------------------------
+Here I list all the parameter sweeps I have done. I include the filename where the data from the parameter sweep is stored and the parameter that was swept over for this file. I also include which raw data files were used in each parameter sweep. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+1) Sweep over q, the probability of coupling to a latent field.
+
+-'plotallnotebook_percellloop-Copy1.ipynb' -- this notebook plots figures from the parameter sweep over q, the probability of coupling to a latent field. 
+
+-'variables/loop_stim10e-16.0et6.0ph1.0pvaryt0.1plNonebp0.5.pkl' -- this python pickle object contains all data relevant to the parameter sweep over q, the probability of coupling to a latent field. The raw data files used to create this object are 'a_stim10e-16.0et6.0ph1.0p*t0.1plNonebp0.5.pkl' and 'env_stim10e-16.0et6.0ph1.0p*t0.1plNonebp0.5.pkl'. The creation of this object using these raw data files is accomplished in the file 'percellloop.py'. The creation of these raw data files is accomplished in the file 'percellsweep.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+2) Sweep over n_f, the number of latent fields included in the simulation.
+
+-'plotallnotebook_stimloop-Copy1.ipynb' -- this notebook plots figures from the parameter sweep over n_f
+
+-'variables/loop_stimvarye-16.0et6.0ph1.0p1.0t0.1plNonebp0.5.pkl' -- this python pickle object contains all data relevant to the parameter sweep over n_f. The raw data files used to create this object are 'a_stim*e-16.0et6.0ph1.0p1.0t0.1plNonebp0.5.pkl' and 'env_stim10e-16.0et6.0ph1.0p*t0.1plNonebp0.5.pkl'. The creation of this object using these raw data files is accomplished in the file 'stimloop.py'. The creation of these raw data files is accomplished in the file 'stimsweep.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+3) Sweep over tau, the time constant of the latent fields. Note that for this parameter sweep, all latent fields have the same time constant.
+
+-'plotallnotebook_timeconst-Copy1.ipynb' -- this notebook plots figures from the parameter sweep over tau
+
+-'variables/loop_stimvarye-16.0et6.0ph1.0p1.0t0.1plNonebp0.5.pkl' -- this python pickle object contains all data relevant to the parameter sweep over tau. The raw data files used to create this object are 'a_stim10e-16.0et6.0ph1.0p1.0t*plNonebp0.5.pkl' and 'env_stim10e-16.0et6.0ph1.0p1.0t*plNonebp0.5.pkl'. The creation of this object using these raw data files is accomplished in the file 'timeconstloop.py'. The creation of these raw data files is accomplished in the file 'timeconstsweep.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+4) Sweep over epsilon, the bias towards silence in the energy function. 
+
+-'plotallnotebook_epsilon-Copy1.ipynb' -- this notebook plots figures from the parameter sweep over eta
+
+-'variables/loop_stim10evaryet6.0ph1.0p1.0t0.1plNonebp0.5.pkl' -- this python pickle object contains all data relevant to the parameter sweep over epsilon. The raw data files used to create this object are 'a_stim10e*et6.0ph1.0p1.0t0.1plNonebp0.5.pkl' and 'env_stim10e*et6.0ph1.0p1.0t0.1plNonebp0.5.pkl'. The creation of this object using these raw data files is accomplished in the file 'epsilonloop.py'. The creation of these raw data files is accomplished in the file 'epsilonsweep.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+5) Sweep over eta, the bias towards silence in the energy function. 
+
+-'plotallnotebook_eta-Copy1.ipynb' -- this notebook plots figures from the parameter sweep over eta
+
+-'variables/loop_stim10e-16.0etvaryph1.0p1.0t0.1plNonebp0.5.pkl' -- this python pickle object contains all data relevant to the parameter sweep over eta. The raw data files used to create this object are 'a_stim10e-16.0et*ph1.0p1.0t0.1plNonebp0.5.pkl' and 'env_stim10e-16.0et*ph1.0p1.0t0.1plNonebp0.5.pkl'. The creation of this object using these raw data files is accomplished in the file 'etaloop.py'. The creation of these raw data files is accomplished in the file 'etasweep.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+6) Sweep over phi, the latent field multiplier in the energy function. 
+
+-'plotallnotebook_phi-Copy1.ipynb' -- this notebook plots figures from the parameter sweep over phi
+
+-'variables/loop_stim10e-16.0et6.0phvaryp1.0t0.1plNonebp0.5.pkl' -- this python pickle object contains all data relevant to the parameter sweep over phi. The raw data files used to create this object are 'a_stim10e-16.0et6.0ph*p1.0t0.1plNonebp0.5.pkl' and 'env_stim10e-16.0et6.0ph*p1.0t0.1plNonebp0.5.pkl'. The creation of this object using these raw data files is accomplished in the file 'philoop.py'. The creation of these raw data files is accomplished in the file 'phisweep.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+7) Varying place cell type as follows:
+
+We complete the following 3 simulations:
+1. $N/2$ cells coupled only to place fields, $N/2$ cells coupled to only latent fields
+2.$N$ cells coupled only to latent fields
+3. $N/2$ cells coupled only to latent fields, $N/2$ cells coupled to both latent fields and place fields.
+4. $N$ cells coupled only to place fields.
+
+We refer to these simulations as both, none, place, and no latent, respectively. 
+
+-'plotallnotebook_typeloop-Copy1.ipynb' -- this notebook plots figures from the sweep over cell type
+
+-'variables/loop_stim10e-16.0et6.0ph1.0p1.0t0.1plvarybpvary.pkl' -- this python pickle object contains all data relevant to the parameter sweep over cell type. The creation of this object using raw data files is accomplished in the file 'typeloop.py'. The creation of these raw data files is accomplished in the file 'typesweep_*.py'. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+8) Mixing the time constants of latent fields:
+
+Simulation including latent fields with a time constant of 5 AND a time constant of 0.1 was investigated (mixed time constants). 
+
+-'plotallnotebook_timeconstcorr.ipynb' -- this notebook plots figures from this sweep over time constant.
+
+-'variables/loop_stim10e-16.0et6.0ph1.0p1.0tcorrvaryplNonebp0.5.pkl' -- this python pickle object contains all data relevant to this parameter sweep over tau. The creation of this object using raw data files is accomplished in the file 'timeconstloopcorr.py'. The creation of these raw data files is accomplished in the file 'timeconstsweepcorr.py'. 
+
+** not included in thesis or paper!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+9) Mixing the time constants of latent fields:
+
+Simulation including 23 latent fields with time constants [0.066, 0.088, 0.1, 0.15, 0.19, 0.33, 0.66, 0.88, 1.0, 1.5, 1.9, 3.3, 6.6, 8.8, 10, 15, 19, 33, 66, 88, 100, 150, 190]. 
+
+-'plotallnotebook_mixedtimeconst.ipynb' -- this notebook plots figures.
+
+-'variables/loop_env_stim10e-16.0et6.0ph1.0p1.0tchoose_23plNonebp0.5' -- this python pickle object contains all data. The creation of this object using raw data files is accomplished in the file 'loopalltchoose.py'. The creation of these raw data files is accomplished in the file 'timeconstsweepmixed.py'. 
+
+** included in paper but not included in thesis!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+10) Larger system size (N=2^13):
+
+Simulation featuring N=2^13 instead of N=1024 system size. 
+
+-'plotallnotebook_bigsystem.ipynb' -- this notebook plots figures.
+
+-'variables/loop_env_stim10e-16.0et6.0ph1.0p1.0t0.1plNonebp0.5_big' -- this python pickle object contains all data. The creation of this object using raw data files is accomplished in the file 'loopallbigsystem.py'. The creation of these raw data files is accomplished in the file 'bigsystemsweep.py'. 
+
+-'variables/loop_env_stim10e-16.0et6.0ph1.0p1.0t0.1plNonebp0.5_big_partial' -- this python pickle object contains additional error bar data. The creation of this object using raw data files is accomplished in the file 'loopallbigsystem.py'. The creation of these raw data files is accomplished in the file 'bigsystemsweep.py'. 
+
+
+***NOTE: THIS PACKAGE WAS NOT ORIGINALLY INTENDED TO RUN SYSTEM SIZE>1024. IN THE ANALYSIS FUNCTIONS IN bootfunc.py, ERROR BARS FOR ONLY 5 CLUSTER SIZES IN EIGENVALUE PLOT AND 7 CLUSTER SIZES
+IN DYNAMIC SCALING PLOT ARE SAVED. Instead, the functions *_partial are used in the function globfunc_partial (in runfunc.py) to generate error bars after the fact. THIS IS HACKED TOGETHER AND IF ONE
+WANTS TO RUN MANY SIMULATIONS WITH LARGER CLUSTER SIZE, I STRONGLY SUGGEST REVISING THE CODE.
+
+***ADDITIONALLY: FOR SYSTEM SIZES LARGER THAN N=2^13, THE CODE WILL LIKELY HAVE INSUFFICIENT MEMORY TO RUN. I RECOMMEND REVISING CODE TO ACCOMADATE LARGER SYSTEM SIZES!
+ 
+** included in paper but not included in thesis!
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+

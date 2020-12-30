@@ -1,0 +1,13 @@
+Metadata-Version: 1.2
+Name: placerg-mia
+Version: 0.0.1
+Summary: coarse-grained spin simulation
+Home-page: UNKNOWN
+Author: mia
+Author-email: mia.morrell@emory.edu
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
