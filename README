@@ -8,7 +8,7 @@ CONTACT: miamorrell321@gmail.com OR mcm8850@nyu.edu OR mmorrell@lanl.gov
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DEPENDENCIES
 ------------------------------------------------------------------------
-blis.py
+blis
 numpy 
 pickle
 nbformat
