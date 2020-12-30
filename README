@@ -2,6 +2,9 @@
 ------------------------------------------------------------------------
 Written by Mia Morrell in 2019-2020.
 
+Used to generate and analyze data featured in Latent dynamical variables produce signatures of spatiotemporal criticality in large biological systems 
+(https://arxiv.org/abs/2008.04435)
+
 CONTACT: miamorrell321@gmail.com OR mcm8850@nyu.edu OR mmorrell@lanl.gov
 
 
@@ -20,23 +23,26 @@ matplotlib
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 TO DO
 ------------------------------------------------------------------------
-TO RUN THIS CODE, YOU WILL NEED TO CHOOSE WHERE DATA WILL BE SAVED AND CHANGE FILEPATHS ACCORDINGLY
+- TO RUN THIS CODE, YOU WILL NEED TO CHOOSE WHERE DATA WILL BE SAVED AND CHANGE FILEPATHS ACCORDINGLY
+- You probably will also want to unpack the simulation and analysis files you want to run from the simulation_files
+and analysis_files directories and place them at the same directory level as the placerg, the python module directory.
+- Run each simulation and analysis file by passing python foo.py. I recommend making bash scripts with these commands.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 INSTRUCTIONS 
 ------------------------------------------------------------------------
-- To enter the virtual environment in which all dependencies are installed, pass 'source entropy/bin/activate' while in the directory ~/mia
 
-- In the directory ~/mia/placesim, you will find all the files I used for running simulations and performing analysis. 
+- To run a set of simulations, input your desired parameters into the function runsim() which is located in 'placerg/runfunc.py'. 
+To run a simulation with no latent fields, use the function runsimnolatent(), located in the same file. Follow the format of any 'simulation_files/*sweep*.py' file.
 
-- To run a set of simulations, input your desired parameters into the function runsim() which is located in '~/mia/placesim/runfunc.py'. To run a simulation with no latent fields, use the function runsimnolatent(), located in the same file. Follow the format of any '~/mia/placesim/*sweep.py' file.
+- To perform coarse-graining analysis on a set of simulations whose filenames can be globbed, input your desired filenames 
+into the function globfunc as shown in any 'analysis_files/*loop*.py' file. 
 
-- To perform coarse-graining analysis on a set of simulations whose filenames can be globbed, input your desired filenames into the function globfunc as shown in any '~/mia/placesim/*loop.py' file. 
+- To perform analysis on a single simulation or a set of simulations whose names cannot be globbed, input filenames into the function 
+loopall() which is located in 'placerg/funcsboot.py'.
 
-- To perform analysis on a single simulation or a set of simulations whose names cannot be globbed, input filenames into the function loopall() which is located in '~/mia/placesim/placerg/funcsboot.py'.
+- To plot results from the saved analysis object, follow the format used in any 'jupyter_notebooks/plotallnotebook*.ipynb' file. 
 
-- To plot results from the saved analysis object, follow the format used in any '~/mia/placesim/plotallnotebook*.ipynb' file. 
-
-- Consult the file '~/mia/placesim/placerg/objects.py' for accessible object attributes for any object in this module.  
+- Consult the file 'placerg/objects.py' for accessible object attributes for any object in this module.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 HOW TO USE THIS REPOSITORY
@@ -50,7 +56,8 @@ HOW TO USE THIS REPOSITORY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FILE STRUCTURE
 ------------------------------------------------------------------------
-- All the code for this module is contained in the directory ~/mia/placesim/placerg on leonhard@euler. Use the virtual environment 'entropy' when working with this code.
+- If you are at Emory University: All the code for this module is contained in the directory ~/mia/placesim/placerg on leonhard@euler. 
+Use the virtual environment 'entropy' when working with this code.
 
 - All raw data files are located on storage@emory.edu (or ask Mia, she maintains a copy of all data)
 
