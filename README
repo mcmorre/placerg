@@ -56,10 +56,6 @@ HOW TO USE THIS REPOSITORY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FILE STRUCTURE
 ------------------------------------------------------------------------
-- If you are at Emory University: All the code for this module is contained in the directory ~/mia/placesim/placerg on leonhard@euler. 
-Use the virtual environment 'entropy' when working with this code.
-
-- All raw data files are located on storage@emory.edu (or ask Mia, she maintains a copy of all data)
 
 - Here is the basic layout of the module:
 1) 'funcs.py' -- contains custom functions for general simulation
